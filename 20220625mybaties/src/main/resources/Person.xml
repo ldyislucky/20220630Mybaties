@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace是名称空间-->
+<mapper namespace="Person"><!--爆红是因为插件的原因关闭插件可以解决问题-->
+    <select id="getAll" resultType="person">
+        select * from student;
+    </select>
+    <!--parameterType是指mybaties的输入参数形式  目前还没有发现parameterType="int"有啥用-->
+    <select id="getId" parameterType="int" resultType="person">
+        select * from student where id = #{id}
+    </select>
+    <!--根据id和name查询,用对象进行这样的多个查询是错误的-->
+    <select id="getIdNa" resultType="person">
+        select * from  student where id = #{id} and name = #{name}
+    </select>
+    <select id="getNaAge" resultType="person">
+        select * from  student where age = #{age} and name = #{name}
+    </select>
+    <select id="getName"  resultType="person">/*模糊查询*/
+        select * from student where name like '%${name}%'
+    </select>
+    <insert id="insertPerson" >
+        insert into student (name,email,age) value (#{name},#{email},#{age})
+    </insert>
+    <update id="upDatePerson">
+        update student set name = #{name},email=#{email},age=#{age}
+        where id=#{id};
+    </update>
+</mapper>
