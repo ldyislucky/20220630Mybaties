@@ -19,4 +19,6 @@ public interface UserMapper {
             @Param("columnNameValue")
             String columnNameValue);
     int update(User user);
+    int insert(User user);
+    int returnIdInsert(User user);
 }

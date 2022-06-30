@@ -70,4 +70,22 @@ public class Test {
         System.out.println(i);
         sqlSession.commit();
     }
+    @org.junit.Test//插入数据
+    public void t4() throws ParseException {
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        User user = new User("佐助", sdf.parse("1997-5-5"), '1', "木叶村");
+        int i = userMapper.insert(user);
+        System.out.println(i);
+        //sqlSession.commit();
+    }
+    @org.junit.Test//returnId插入数据
+    public void t44() throws ParseException {
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        User user = new User("宇智波鼬", sdf.parse("1996-5-5"), '1', "宇智波一族");
+        //已经提交但是却未提交成功也会使得id自增1  返回的依旧是更新值
+        int i = userMapper.returnIdInsert(user);
+        System.out.println(i);
+        sqlSession.commit();
+    }
+
 }

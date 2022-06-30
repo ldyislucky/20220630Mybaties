@@ -3,12 +3,25 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ldy.mapper.UserMapper">
+
     <!--#{} 中所写的内容与parameterType传入的参数类型有关，若是基本数据类型或者字符串则里面可以随意写
     但是不建议这样搞，若是为引用数据类型的实例，则括号中的名称需要与实例的成员变量属性保持一致；-->
     <update id="update" >
         update users set username = #{username}, birthday = #{birthday},
                          sex = #{sex},address=#{address} where id = #{id}
     </update>
+    <insert id="insert">
+        insert into users(username,birthday,sex,address)
+         value (#{username},#{birthday},#{sex},#{address})
+    </insert>
+
+    <insert id="returnIdInsert">
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            select last_insert_id();
+        </selectKey>
+        insert into users(username,birthday,sex,address)
+        value (#{username},#{birthday},#{sex},#{address})
+    </insert>
 
     <select id="getAll" resultType="user">
         select * from users
@@ -30,8 +43,5 @@
         select * from users
         where ${columnName} like concat('%',#{columnNameValue},'%')
     </select>
-
-
-
 
 </mapper>
