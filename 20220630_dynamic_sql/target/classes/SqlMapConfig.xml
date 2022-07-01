@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--以下属性标签顺序不能更改-->
+    <properties resource="db1.properties" ></properties>
+    <!--设置日志输出底层执行代码-->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <typeAliases>
+        <!--
+        单个实体类别名注册
+        <typeAlias type="com.ldy.product.Person" alias="Person"></typeAlias>
+        -->
+        <!--批量注册别名会将你的类名首个字母改成小写-->
+        <package name="com.ldy.pojo"></package>
+    </typeAliases>
+
+
+    <environments default="development"><!--设置默认开发环境-->
+        <environment id="development">
+            <transactionManager type="JDBC"></transactionManager><!--将事务设置为程序员提交-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <package name="com.ldy.mapper"/><!--此处使用package加载全部配置文件，不要使用mapper-->
+    </mappers>
+
+</configuration>

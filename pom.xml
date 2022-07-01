@@ -12,6 +12,8 @@
         <module>20220624_dynamic_001_static</module>
         <module>20220625mybaties</module>
         <module>20220629proxy</module>
+        <module>20220630_dynamic_sql</module>
+        <module>20220701_Inconsistent_name</module>
     </modules>
 
     <properties>

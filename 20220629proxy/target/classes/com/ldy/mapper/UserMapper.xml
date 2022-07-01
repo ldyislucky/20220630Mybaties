@@ -14,7 +14,8 @@
         insert into users(username,birthday,sex,address)
          value (#{username},#{birthday},#{sex},#{address})
     </insert>
-
+    <!--resultType是返回值类型 keyProperty是指使用user类中的那个属性接受
+    order="AFTER"是指在insert的语句执行完毕之后执行  但是这个在代码里目前好像没啥用 -->
     <insert id="returnIdInsert">
         <selectKey resultType="int" keyProperty="id" order="AFTER">
             select last_insert_id();

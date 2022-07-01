@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ldy.mapper.UMapper">
+
+    <!--前面是数据库列名，后面是类的属性名，千万不要搞混了，标签内部不能有注释-->
+    <select id="getByCondition" resultType="com.ldy.pojo.User">
+        select * from users
+        <where>
+            <if test="username != null and username != '' ">
+                and username like concat('%',#{username},'%')
+            </if>
+            <if test="birthday != null">
+                and birthday = #{birthday}
+            </if>
+            <if test="sex != null and sex != ''">
+                and sex = #{sex}
+            </if>
+            <if test="address != null and address != ''">
+                and address like concat('%',#{address},'%')
+            </if>
+        </where>
+    </select>
+    <!--where后面为何只能用id-->
+    <update id="updateBySet">
+        update users
+        <set>
+            <if test="username!=null and username!=''">
+                username=#{username},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday},
+            </if>
+            <if test="sex!=null and sex!=''">
+                sex = #{sex},
+            </if>
+            <if test="address!=null and address!=''">
+                address = #{address},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <!--
+    item="id"与#{id}需要保持一致
+    <foreach>主要用来进行集合或数组的遍历，主要有以下参数：
+    collection：collection 属性的值有三个分别是 list、array、map 三种，
+                分别对应的参数类型为：List、数组、map 集合。
+    item ：循环体中的具体对象。支持属性的点路径访问，如item.age,item.info.details，
+             在list和数组中是其中的对象，在map中是value。
+    index ：在list和数组中,index是元素的序号，在map中，index是元素的key，该参数可选。
+    open ：表示该语句以什么开始
+    close ：表示该语句以什么结束
+    separator ：表示元素之间的分隔符，例如在in()的时候，
+    separator=","会自动在元素中间用“,“隔开，避免手动输入逗号导致sql错误，如in(1,2,)这样。该参数可选。
+    -->
+    <select id="getByIds" resultType="com.ldy.pojo.User">
+        select * from users
+        where id in(
+            <foreach collection="array" item="id" separator=",">
+                #{id}
+            </foreach>
+            )
+    </select>
+
+    <insert id="insertMany">
+        insert into users (username,birthday,sex,address)
+        values 
+        <foreach collection="list" item="u" separator=",">
+            (#{u.username},#{u.birthday},#{u.sex},#{u.address})
+        </foreach>
+    </insert>
+    <select id="getByBirthday" resultType="com.ldy.pojo.User">
+        select * from users
+        where birthday between #{begin} and #{over}
+    </select>
+    <select id="getByBirthday1" resultType="com.ldy.pojo.User">
+        select * from users
+        where birthday between #{begin} and #{over}
+    </select>
+
+</mapper>
