@@ -1,4 +1,6 @@
+import com.ldy.mapper.CustomerMapper;
 import com.ldy.mapper.PersonMapper;
+import com.ldy.pojo.Customer;
 import com.ldy.pojo.Person;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -45,6 +47,12 @@ public class Test {
         PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
         List<Person> all = mapper.getAll3();
         all.forEach(a-> System.out.println(a));
+    }
+    @org.junit.Test//多对一
+    public void t4(){
+        CustomerMapper mapper = sqlSession.getMapper(CustomerMapper.class);
+        List<Customer> customers = mapper.getById(1);
+        System.out.println(customers);
     }
 
 }
