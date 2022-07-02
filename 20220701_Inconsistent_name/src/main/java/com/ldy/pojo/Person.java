@@ -7,18 +7,18 @@ import java.util.Date;
  * @author : ldy
  * @version : 1.0
  */
-public class User {
+public class Person {
     private  int         id        ;
-    private  String      username  ;
-    private Date birthday  ;
+    private  String      name      ;
+    private Date         birthday  ;
     private  char        sex       ;
     private  String      address   ;
 
-    public User() {
+    public Person() {
     }
 
-    public User(String username, Date birthday, char sex, String address) {
-        this.username = username;
+    public Person(String name, Date birthday, char sex, String address) {
+        this.name = name;
         this.birthday = birthday;
         this.sex = sex;
         this.address = address;
@@ -28,7 +28,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", username='" + name + '\'' +
                 ", birthday=" + birthday +
                 ", sex=" + sex +
                 ", address='" + address + '\'' +
@@ -39,12 +39,12 @@ public class User {
         return id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getBirthday() {

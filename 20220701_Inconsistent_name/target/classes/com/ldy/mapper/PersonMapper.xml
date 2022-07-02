@@ -9,10 +9,7 @@
     <select id="getAll1" resultType="com.ldy.pojo.Person">
         select userid id,username name, address from person
     </select>
-    <!--
-    通过映射绑定数据库的列名和类的属性名来解决名称不一致问题
-    在本配置以下开始生效
-    -->
+    <!--通过映射绑定数据库的列名和类的属性名来解决名称不一致问题-->
     <resultMap id="personmap" type="person">
         <!--主键绑定-->
         <id property="id" column="userid"></id>
